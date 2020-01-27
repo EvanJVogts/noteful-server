@@ -6,11 +6,6 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const foldersRouter = require('./folders/folders-router');
 const notesRouter = require('./notes/notes-router');
-const knex = require('knex');
-const knexInstance = knex({
-  client: 'pg',
-  connection: process.env.DB_URL,
-});
 const app = express();
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
 app.use(morgan(morganOption));
