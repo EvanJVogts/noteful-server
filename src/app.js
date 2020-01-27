@@ -7,9 +7,11 @@ const { NODE_ENV } = require('./config');
 const foldersRouter = require('./folders/folders-router');
 const notesRouter = require('./notes/notes-router');
 const app = express();
+
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
+
 app.use(morgan(morganOption));
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://bookmarks-app.evanjvogts.now.sh'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin - like mobile apps, curl, postman
@@ -23,6 +25,7 @@ app.use(cors({
   }
 }));
 app.use(helmet());
-app.use('/api/folders', foldersRouter);
-app.use('/api/notes', notesRouter);
+app.use('/folders', foldersRouter);
+app.use('/notes', notesRouter);
+
 module.exports = app;
